@@ -1,4 +1,4 @@
-from typing import List, Tuple, Dict, NamedTuple
+from typing import List
 
 """
 BFFFBBFRRR: row 70, column 7, seat ID 567.
