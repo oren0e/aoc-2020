@@ -6,11 +6,9 @@ class Instruction:
         self.name = name
         self.value = value
         self.been_executed: bool = False
-        self.checked: bool = False
 
     def __repr__(self) -> str:
-        return repr(f"Instruction(name: {self.name}, value: {self.value}, been_executed: {self.been_executed}, "
-                    f"checked: {self.checked})")
+        return repr(f"Instruction(name: {self.name}, value: {self.value}, been_executed: {self.been_executed})")
 
 def parse_input(file: str) -> List[Instruction]:
     instructions: List[Instruction] = []
