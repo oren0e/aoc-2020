@@ -72,7 +72,7 @@ class Point2(NamedTuple):
     z: int
     w: int
 
-    def get_neighbors(self) -> Iterator[Point]:
+    def get_neighbors(self) -> Iterator[Point2]:
         for dx, dy, dz, dw in itertools.product([-1, 0, 1], [-1, 0, 1], [-1, 0, 1], [-1, 0, 1]):
             if (dx != 0) or (dy != 0) or (dz != 0) or (dw != 0):
                 yield Point2(self.x + dx, self.y + dy, self.z + dz, self.w + dw)
