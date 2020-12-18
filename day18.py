@@ -61,7 +61,7 @@ assert calculate_full_line("5 + (8 * 3 + 9 + 3 * 4 * 3)") == 437
 assert calculate_full_line("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))") == 12240
 assert calculate_full_line("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2") == 13632
 
-assert calculate_full_line("9 + 5 * 6 + 7 * 9 + 5") == 824      # problem with replace in calculate_simple_line
+assert calculate_full_line("9 + 5 * 6 + 7 * 9 + 5") == 824
 
 
 def get_sum_of_lines(file: str) -> int:
@@ -72,24 +72,19 @@ def get_sum_of_lines(file: str) -> int:
 
 
 ## Part 2 ##
-def calc_addition(orig_addition: str) -> int:
+def calc_addition(orig_addition: str) -> str:
     addition = re.sub(r"\+", lambda ele: " " + ele[0] + " ", orig_addition)
 
     if addition.count("+") == 1:
         current = one_calculation(addition)
         return addition.replace(addition, str(current), 1)
     else:
-        if re.match(r'(^\d+\s.\s\d+)', addition) is None:
-            return int(addition)
         first_expression = re.match(r'(^\d+\s.\s\d+)', addition).group(1)
-        rest_of_expression = re.split(f"{re.escape(first_expression)}", addition)
-        if all(c == "" for c in rest_of_expression):
-            return one_calculation(first_expression)
-        else:
-            current = one_calculation(first_expression)
-            addition = addition.replace(first_expression, str(current), 1)
-            addition = addition.replace(" ", "")
-            return calc_addition(addition)
+
+        current = one_calculation(first_expression)
+        addition = addition.replace(first_expression, str(current), 1)
+        addition = addition.replace(" ", "")
+        return calc_addition(addition)
 
 
 def calculate_simple_line2(line: str) -> int:
