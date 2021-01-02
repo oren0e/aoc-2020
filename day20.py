@@ -79,7 +79,7 @@ def parse_input(file: str) -> List[Tile]:
         raw = f.read()
     return [Tile.parse(t) for t in raw.split('\n\n')]
 
-tiles = parse_input('data/day20_data')
+tiles = parse_input('data/day20_test')
 
 
 def compare_edges(tile1_edges: Dict[str, List[str]], tile2_edges: Dict[str, List[str]]) ->\
@@ -182,8 +182,7 @@ def get_corner_tiles(tiles: List[Tile]) -> List[int]:
 # test
 # assert reduce(lambda x,y: x*y, get_corner_tiles(tiles)) == 20899048083289
 
-print(reduce(lambda x, y: x*y, get_corner_tiles(tiles)))
-
+# print(reduce(lambda x, y: x*y, get_corner_tiles(tiles)))
 
 
 
@@ -196,15 +195,14 @@ print(reduce(lambda x, y: x*y, get_corner_tiles(tiles)))
 #
 #
 
-
-# def rearange_tiles(tiles: List[Tile]) -> List[Tile]:
-#     """
-#     Corner tiles need 2 other tiles with common edges
-#     Edge tile need 3
-#     All other need 4
-#     """
-#     num_in_row = math.sqrt(len(tiles))  # since its a square arrangement
-#     res_list: List[Optional[Tile]] = [None for _ in range(len(tiles))]
-#     for i, tile in enumerate(tiles):
-#         pairs_dict = count_matching_edges(tile, get_tiles_minus(tile, tiles))
-#         non_zero_tiles = count_non_zero_edges(pairs_dict)
+def rearange_tiles(tiles: List[Tile]) -> List[Tile]:
+    """
+    Corner tiles need 2 other tiles with common edges
+    Edge tile need 3
+    All other need 4
+    """
+    num_in_row = math.sqrt(len(tiles))  # since its a square arrangement
+    res_list: List[Optional[Tile]] = [None for _ in range(len(tiles))]
+    for i, tile in enumerate(tiles):
+        pairs_dict = count_matching_edges(tile, get_tiles_minus(tile, tiles))
+        non_zero_tiles = count_non_zero_edges(pairs_dict)
